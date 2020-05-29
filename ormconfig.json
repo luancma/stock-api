@@ -1,0 +1,13 @@
+{
+  "type": "postgres",
+  "host": "172.29.141.181",
+  "port": 5432,
+  "username": "postgres",
+  "password": "docker",
+  "database": "stock",
+  "entities": ["./src/modules/**/infra/typeorm/entities/*.ts"],
+  "migrations": ["./src/shared/infra/http/typeorm/database/migrations/*.ts"],
+  "cli": {
+    "migrationsDir": "./src/shared/infra/http/typeorm/database/migrations"
+  }
+}
