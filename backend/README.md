@@ -11,12 +11,12 @@ yarn dev
 
 ### 🧾 Features:
 
-[ ] User - CRUD 📌
-[ ] Sessison
-[ ] Products - CRUD
-[ ] Stock - CRUD
-[ ] INPUT/OUTPUT - CRUD
-[ ] CLOSE CASHIER - CRUD
+- [ ] User - CRUD 📌
+- [ ] Sessison
+- [ ] Products - CRUD
+- [ ] Stock - CRUD
+- [ ] INPUT/OUTPUT - CRUD
+- [ ] CLOSE CASHIER - CRUD
 
 📌 - Selected
 ✔️ - Done
