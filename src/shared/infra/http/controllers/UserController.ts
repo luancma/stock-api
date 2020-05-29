@@ -1,25 +1,37 @@
 import { Request, Response } from 'express';
 import UserRepository from '@modules/users/infra/typeorm/repositories/UserRepository';
+import CreateUserService from '@modules/users/services/CreateUserService';
 
 class UserController {
-  async store(request: Request, response: Response): Promise<Response> {
+  async store(request: Request, response: Response): Promise<any> {
     const userRepository = new UserRepository();
+
+    const createUser = new CreateUserService(userRepository);
 
     const { name, email, password } = request.body;
 
-    const { id, created_at } = await userRepository.create({
-      name,
-      email,
-      password,
-    });
+    try {
+      await createUser.execute({
+        name,
+        email,
+        password,
+      });
 
-    return response.status(201).json({
-      id,
-      name,
-      email,
-      password,
-      created_at,
-    });
+      const createdUser = await userRepository
+        .findByEmail({ email })
+        .then(value => value?.created_at);
+
+      response.status(201).json({
+        name,
+        email,
+        password,
+        created_at: createdUser,
+      });
+    } catch (err) {
+      response.status(400).json({
+        error: err.message,
+      });
+    }
   }
 
   async index(request: Request, response: Response): Promise<Response> {

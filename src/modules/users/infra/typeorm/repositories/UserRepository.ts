@@ -33,8 +33,8 @@ class UserRepository implements IUserRepository {
     name,
     email,
     password,
-  }: Omit<IUser, 'id'>): Promise<User> {
-    const user = this.ormRepository.create({ name, email, password });
+  }: Omit<IUser, 'id'>): Promise<User | undefined> {
+    const user = await this.ormRepository.create({ name, email, password });
 
     await this.ormRepository.save(user);
 
@@ -43,6 +43,18 @@ class UserRepository implements IUserRepository {
 
   public async delete({ id }: Pick<IUser, 'id'>): Promise<void> {
     await this.ormRepository.delete(id);
+  }
+
+  public async findByEmail({
+    email,
+  }: Pick<IUser, 'email'>): Promise<User | undefined> {
+    const user = await this.ormRepository.findOne({
+      where: {
+        email,
+      },
+    });
+
+    return user;
   }
 }
 

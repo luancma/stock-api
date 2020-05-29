@@ -18,5 +18,7 @@ export default interface IUserRepository {
 
   findById({ id }: Pick<IUser, 'id'>): Promise<User | undefined>;
 
+  findByEmail({ email }: Pick<IUser, 'email'>): Promise<User | undefined>;
+
   delete({ id }: Pick<IUser, 'id'>): Promise<void>;
 }
